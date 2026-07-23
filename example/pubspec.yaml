@@ -21,23 +21,20 @@ dependencies:
   flutter_svg: ^2.0.5
   dropdown_button2: ^2.3.6
   collection: '>=1.16.0'
-  # 👇 新增：用于在 App 内完美加载 H5 网页并支持麦克风授权的 WebView 插件
-  flutter_inappwebview: ^6.0.0
+  webview_flutter: ^4.7.0
 
   livekit_client:
     path: ../
 
 dependency_overrides:
-  # Pin packages that use Apple APIs unavailable on CI runner's Xcode version.
-  connectivity_plus: '>=7.0.0 <7.1.0' # NWPath.isUltraConstrained
-  device_info_plus: '>=12.3.0 <12.4.0' # NSProcessInfo.isiOSAppOnVision
+  connectivity_plus: '>=7.0.0 <7.1.0'
+  device_info_plus: '>=12.3.0 <12.4.0'
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
 
-# The following section is specific to Flutter.
 flutter:
   uses-material-design: true
   assets:
