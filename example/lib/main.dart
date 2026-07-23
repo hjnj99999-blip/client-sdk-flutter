@@ -1,44 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:livekit_example/theme.dart';
-import 'package:logging/logging.dart';
-import 'package:intl/intl.dart';
-import 'pages/connect.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
-  final format = DateFormat('HH:mm:ss');
-  // configure logs for debugging
-  Logger.root.level = Level.FINEST;
-  Logger.root.onRecord.listen((record) {
-    print('${format.format(record.time)} [${record.level.name}]: ${record.message}');
-  });
-
   WidgetsFlutterBinding.ensureInitialized();
-  /*if (lkPlatformIsDesktop()) {
-    await FlutterWindowClose.setWindowShouldCloseHandler(() async {
-      await onWindowShouldClose?.call();
-      return true;
-    });
-  }*/
-
-  /// for livestreaming app, you can initialize the bypassVoiceProcessing = true
-  /// here to get better audio quality
-  ///
-  /// await LiveKitClient.initialize(
-  ///  bypassVoiceProcessing: lkPlatformIsMobile(),
-  /// );
-  runApp(const LiveKitExampleApp());
+  // 启动时动态申请麦克风权限
+  await Permission.microphone.request();
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MeetingWebApp(),
+  ));
 }
 
-class LiveKitExampleApp extends StatelessWidget {
-  //
-  const LiveKitExampleApp({
-    super.key,
-  });
+class MeetingWebApp extends StatefulWidget {
+  const MeetingWebApp({super.key});
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        title: 'LiveKit Flutter Example',
-        theme: LiveKitTheme().buildThemeData(context),
-        home: const ConnectPage(),
-      );
+  State<MeetingWebApp> createState() => _MeetingWebAppState();
+}
+
+class _MeetingWebAppState extends State<MeetingWebApp> {
+  InAppWebViewController? webViewController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // 沉浸式体验，不留顶部边框，或者保留标题栏
+      body: SafeArea(
+        child: InAppWebView(
+          initialUrlRequest: URLRequest(
+            url: WebUri("https://xzscl.duckdns.org"),
+          ),
+          initialSettings: InAppWebViewSettings(
+            // 允许网页自动播放声音和使用麦克风
+            mediaPlaybackRequiresUserGesture: false,
+            allowsInlineMediaPlayback: true,
+            // 允许 H5 权限请求
+            useOnPermissionRequest: true,
+          ),
+          onWebViewCreated: (controller) {
+            webViewController = controller;
+          },
+          // 自动同意网页发起的麦克风权限申请
+          androidOnPermissionRequest: (controller, origin, resources) async {
+            return PermissionRequestResponse(
+              resources: resources,
+              action: PermissionRequestResponseAction.GRANT,
+            );
+          },
+        ),
+      ),
+    );
+  }
 }
