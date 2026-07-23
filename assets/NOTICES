@@ -5831,6 +5831,7 @@ shared_preferences_linux
 shared_preferences_web
 shared_preferences_windows
 vector_graphics_codec
+webview_flutter
 xdg_directories
 
 Copyright 2013 The Flutter Authors. All rights reserved.
@@ -11102,7 +11103,6 @@ shared_preferences_foundation
 shared_preferences_platform_interface
 vector_graphics
 vector_graphics_compiler
-webview_flutter
 webview_flutter_platform_interface
 webview_flutter_wkwebview
 
@@ -31764,7 +31764,7 @@ SOFTWARE.
 --------------------------------------------------------------------------------
 webview_flutter_android
 
-Copyright 2013 The Flutter Authors
+Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
