@@ -21,9 +21,7 @@ dependencies:
   flutter_svg: ^2.0.5
   dropdown_button2: ^2.3.6
   collection: '>=1.16.0'
-  # 官方原生支持网页权限透传的组合
-  webview_flutter: ^4.7.0
-  webview_flutter_android: ^3.15.0
+  flutter_inappwebview: ^6.0.0
 
   livekit_client:
     path: ../
