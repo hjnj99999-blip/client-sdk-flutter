@@ -22,7 +22,6 @@ dependencies:
   dropdown_button2: ^2.3.6
   collection: '>=1.16.0'
   webview_flutter: ^4.7.0
-  webview_flutter_android: ^3.12.0
 
   livekit_client:
     path: ../
