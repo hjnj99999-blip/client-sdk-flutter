@@ -21,6 +21,8 @@ dependencies:
   flutter_svg: ^2.0.5
   dropdown_button2: ^2.3.6
   collection: '>=1.16.0'
+  # 👇 新增：用于在 App 内完美加载 H5 网页并支持麦克风授权的 WebView 插件
+  flutter_inappwebview: ^6.0.0
 
   livekit_client:
     path: ../
