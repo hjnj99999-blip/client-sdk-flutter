@@ -21,8 +21,9 @@ dependencies:
   flutter_svg: ^2.0.5
   dropdown_button2: ^2.3.6
   collection: '>=1.16.0'
-  # 👇 删除了 webview_flutter，新增：用于彻底解决权限透传的 InAppWebView 插件
-  flutter_inappwebview: ^6.0.0
+  # 官方原生支持网页权限透传的组合
+  webview_flutter: ^4.7.0
+  webview_flutter_android: ^3.15.0
 
   livekit_client:
     path: ../
